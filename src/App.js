@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
-import TransactionTable from './components/TransactionTable';
-import TransactionForm from './components/TransactionForm';
-import SearchBar from './components/SearchBar';
+import './App.css';
+import Form from './components/TransactionForm';
+import SearchBar from './components/SearchBar'; 
+
 
 function App() {
-  const [transactions, setTransactions] = useState([
-    { description: "Groceries", amount: 50, category: "Food" },
-    { description: "Gas", amount: 30, category: "Transportation" },
-    // Add more initial transactions if needed
-  ]);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const addTransaction = (newTransaction) => {
-    setTransactions([...transactions, newTransaction]);
+  const [transactions, setTransactions] = useState([]);
+  const addTransaction = (transaction) => {
+    setTransactions([...transactions, transaction]);
   };
 
-  const filteredTransactions = transactions.filter(transaction =>
-    transaction.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <div>
-      <h1>Welcome to Bank of Flatiron</h1>
-      <TransactionForm onSubmit={addTransaction} />
-      <SearchBar value={searchTerm} onChange={setSearchTerm} />
-      <TransactionTable transactions={filteredTransactions} />
+    <div className="container"> {/* Container to span the whole width of the page */}
+      <h1 className="App">The Royal Bank of Flatiron</h1>
+      <SearchBar value={searchTerm} onChange={(value) => setSearchTerm(value)} /> {/* Pass onChange prop */}
+      <Form addTransaction={addTransaction} />
+      
     </div>
   );
 }
 
 export default App;
+
+
+
 
 
 
